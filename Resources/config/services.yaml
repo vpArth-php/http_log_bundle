@@ -1,4 +1,7 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
 
   UmaTech\HttpLogBundle\Service\DeciderInterface:
     class: UmaTech\HttpLogBundle\Service\Decider
@@ -15,10 +18,9 @@ services:
     alias: UmaTech\HttpLogBundle\Service\PersisterInterface
 
   UmaTech\HttpLogBundle\Controller\ViewLogController:
+    public: true
     tags:
       - controller.service_arguments
-    calls:
-      - [ setContainer, [ '@service_container' ] ]
 
 
   umatech.http_loader.listener:
