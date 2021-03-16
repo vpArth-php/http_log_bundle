@@ -5,6 +5,7 @@ namespace Tests\Functional;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,6 +29,7 @@ class HttpLogBundleKernel extends Kernel
   {
     return [
         new FrameworkBundle(),
+        new TwigBundle(),
         new HttpLogBundle(),
     ];
   }

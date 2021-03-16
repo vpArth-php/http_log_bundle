@@ -9,6 +9,8 @@ class ViewLogController extends AbstractController
 {
   public function viewLogAction(): Response
   {
-    return new Response('in progress');
+    return $this->render('@HttpLog/view-log/list.html.twig', [
+
+    ]);
   }
 }
