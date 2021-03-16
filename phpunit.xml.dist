@@ -6,7 +6,7 @@
          bootstrap="vendor/autoload.php"
          failOnRisky="true"
          failOnWarning="true"
-         cacheResult="false"
+         cacheResultFile="/tmp/phpunit-http_log.cache"
 >
     <php>
         <ini name="error_reporting" value="-1"/>
@@ -33,5 +33,4 @@
             <group>ignore</group>
         </exclude>
     </groups>
-
 </phpunit>

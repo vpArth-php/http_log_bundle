@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\KernelInterface;
 use UmaTech\HttpLogBundle\DependencyInjection\HttpLogExtension;
+use function uniqid;
 
 class HttpLogExtensionTest extends TestCase
 {
@@ -37,5 +38,15 @@ class HttpLogExtensionTest extends TestCase
   {
     yield [['enabled' => true]];
     yield [['enabled' => false]];
+  }
+
+  public function testNoThrowIfConfigAbsent(): void
+  {
+    $this->container->setParameter('kernel.environment', uniqid('x', false));
+
+    $extension = new HttpLogExtension();
+    $extension->load([['enabled' => true]], $this->container);
+
+    self::assertTrue($this->container->has('umatech.http_loader.listener'));
   }
 }

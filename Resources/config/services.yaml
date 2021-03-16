@@ -1,11 +1,30 @@
 services:
+
+  UmaTech\HttpLogBundle\Service\DeciderInterface:
+    class: UmaTech\HttpLogBundle\Service\Decider
+    arguments:
+      - '%umatech.http_loader.kind%'
+      - '%umatech.http_loader.name%'
+
+  UmaTech\HttpLogBundle\Service\PersisterInterface:
+    class: UmaTech\HttpLogBundle\Service\DummyPersister
+
+  umatech.http_loader.decider:
+    alias: UmaTech\HttpLogBundle\Service\DeciderInterface
+  umatech.http_loader.persister:
+    alias: UmaTech\HttpLogBundle\Service\PersisterInterface
+
+  UmaTech\HttpLogBundle\Controller\ViewLogController:
+    tags:
+      - controller.service_arguments
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+
+
   umatech.http_loader.listener:
     class: UmaTech\HttpLogBundle\EventListener\HttpLogListener
     tags:
       - kernel.event_subscriber
-
-  umatech.http_loader.decider:
-    class:  UmaTech\HttpLogBundle\Service\Decider
     arguments:
-      - '%umatech.http_loader.kind%'
-      - '%umatech.http_loader.name%'
+      - '@umatech.http_loader.decider'
+      - '@umatech.http_loader.persister'

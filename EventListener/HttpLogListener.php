@@ -2,12 +2,13 @@
 
 namespace UmaTech\HttpLogBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use UmaTech\HttpLogBundle\Service\DeciderInterface;
 use UmaTech\HttpLogBundle\Service\PersisterInterface;
 
-class HttpLogListener
+class HttpLogListener implements EventSubscriberInterface
 {
   /** @var DeciderInterface */
   protected $decider;

@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    public: true
+
+  UmaTech\HttpLogBundle\Service\DeciderInterface:
+    class: UmaTech\HttpLogBundle\Service\Decider
+    arguments:
+      - '%umatech.http_loader.kind%'
+      - '%umatech.http_loader.name%'
+
+  UmaTech\HttpLogBundle\Service\PersisterInterface:
+    class: UmaTech\HttpLogBundle\Service\DummyPersister

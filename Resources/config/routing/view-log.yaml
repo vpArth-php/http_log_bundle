@@ -1,0 +1,4 @@
+view-log:
+  path: /
+  controller: UmaTech\HttpLogBundle\Controller\ViewLogController::viewLogAction
+
