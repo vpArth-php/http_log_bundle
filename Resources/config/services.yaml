@@ -3,3 +3,9 @@ services:
     class: UmaTech\HttpLogBundle\EventListener\HttpLogListener
     tags:
       - kernel.event_subscriber
+
+  umatech.http_loader.decider:
+    class:  UmaTech\HttpLogBundle\Service\Decider
+    arguments:
+      - '%umatech.http_loader.kind%'
+      - '%umatech.http_loader.name%'
