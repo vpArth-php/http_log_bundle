@@ -1,0 +1,5 @@
+services:
+  umatech.http_loader.listener:
+    class: UmaTech\HttpLogBundle\EventListener\HttpLogListener
+    tags:
+      - kernel.event_subscriber
