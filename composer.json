@@ -1,0 +1,31 @@
+{
+  "name": "arth/http_log_bundle",
+  "type": "symfony-bundle",
+  "description": "Provides ability to log http requests and response(Test Task)",
+  "keywords": [],
+  "license": "proprietary",
+  "authors": [
+    {"name": "Alexander Deider", "email": "arth.inbox@gmail.com"}
+  ],
+  "require": {
+    "php": ">=7.2.5",
+    "symfony/config": "^4.4|^5.0",
+    "symfony/framework-bundle": "^5.3",
+    "symfony/http-kernel": "^5.2",
+    "symfony/routing": "^4.4|^5.0",
+    "symfony/twig-bundle": "^4.4|^5.0",
+    "twig/twig": "^2.13|^3.0.4",
+    "phpunit/phpunit": "8.5.x-dev"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "symfony/browser-kit": "^4.4|^5.0",
+    "symfony/console": "^4.4|^5.0",
+    "symfony/css-selector": "^4.4|^5.0"
+  },
+  "autoload": {
+    "psr-4": {"UmaTech\\HttpLogBundle\\": ""},
+    "exclude-from-classmap": ["/Tests/"]
+  },
+  "minimum-stability": "dev"
+}
