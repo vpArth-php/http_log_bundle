@@ -3,7 +3,7 @@
   "type": "symfony-bundle",
   "description": "Provides ability to log http requests and response(Test Task)",
   "keywords": [],
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {"name": "Alexander Deider", "email": "arth.inbox@gmail.com"}
   ],
