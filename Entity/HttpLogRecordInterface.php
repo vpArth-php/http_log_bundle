@@ -3,8 +3,9 @@
 namespace UmaTech\HttpLogBundle\Entity;
 
 use DateTimeInterface;
+use JsonSerializable;
 
-interface HttpLogRecordInterface
+interface HttpLogRecordInterface extends JsonSerializable
 {
   /**
    * @return int
