@@ -10,3 +10,6 @@ services:
 
   UmaTech\HttpLogBundle\Service\PersisterInterface:
     class: UmaTech\HttpLogBundle\Service\DummyPersister
+
+  UmaTech\HttpLogBundle\Service\HttpRecordRepositoryInterface:
+    class: UmaTech\HttpLogBundle\Service\DummyHttpRecordRepository

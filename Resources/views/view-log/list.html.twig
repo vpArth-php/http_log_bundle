@@ -1,5 +1,14 @@
 {% extends '@HttpLog/base.html.twig' %}
-
+{% block stylesheets %}
+    <style>
+    .http-body {
+        white-space: pre;
+        max-height: 8em;
+        max-width: 33vw;
+        overflow: auto;
+    }
+    </style>
+{% endblock %}
 {% block body %}
     <h1>Http Log</h1>
     <table class="http-log-table">
@@ -14,7 +23,20 @@
         </tr>
         </thead>
         <tbody>
-
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.uri }}</td>
+                <td>
+                    <div class="http-body">{{ entry.request }}</div>
+                </td>
+                <td>
+                    <div class="http-body">{{ entry.response }}</div>
+                </td>
+                <td>{{ entry.status }}</td>
+                <td>{{ entry.ip }}</td>
+                <td style="white-space: nowrap;">{{ entry.queryTime | date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}

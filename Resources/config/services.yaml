@@ -12,6 +12,9 @@ services:
   UmaTech\HttpLogBundle\Service\PersisterInterface:
     class: UmaTech\HttpLogBundle\Service\DummyPersister
 
+  UmaTech\HttpLogBundle\Service\HttpRecordRepositoryInterface:
+    class: UmaTech\HttpLogBundle\Service\DummyHttpRecordRepository
+
   umatech.http_loader.decider:
     alias: UmaTech\HttpLogBundle\Service\DeciderInterface
   umatech.http_loader.persister:
