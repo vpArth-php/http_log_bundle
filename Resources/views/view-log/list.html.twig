@@ -11,6 +11,9 @@
 {% endblock %}
 {% block body %}
     <h1>Http Log</h1>
+    <div>
+        <input name="ip_filter" title="Фильтрация по IP"/>
+    </div>
     <table class="http-log-table">
         <thead>
         <tr>
@@ -34,9 +37,80 @@
                 </td>
                 <td>{{ entry.status }}</td>
                 <td>{{ entry.ip }}</td>
-                <td style="white-space: nowrap;">{{ entry.queryTime | date('Y-m-d H:i:s') }}</td>
+                <td>{{ entry.queryTime | date('Y-m-d H:i:s') }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+{% block javascripts %}
+    <script>
+    const httpLogTable  = document.querySelector('table.http-log-table');
+    const ipFilterInput = document.querySelector(`input[name=ip_filter]`);
+
+    ipFilterInput.addEventListener('change', async () => {
+      const ip     = ipFilterInput.value.replace(/\s+$|^\s+/g, '');
+      const result = await getData(ip);
+
+      updateUI(result.entries);
+    });
+
+    async function getData(ip) {
+      const response = await fetch('/admin/http-log/?' + new URLSearchParams({ip}), {
+        headers: {
+          Accept: 'application/json',
+        }
+      });
+      return response.json();
+    }
+
+    function updateUI(entries) {
+      const tbody = httpLogTable.querySelector('tbody');
+      // remove old rows
+      for (const tr of tbody.querySelectorAll('tr')) {
+        tr.parentNode.removeChild(tr);
+      }
+      // build new rows
+      for (const entry of entries) {
+        const tr = document.createElement('tr');
+        {
+          const td     = document.createElement('td');
+          td.innerText = entry.uri;
+          tr.appendChild(td);
+        }
+        {
+          const td  = document.createElement('td');
+          const pre = document.createElement('div');
+          pre.classList.add('http-body')
+          pre.innerText = entry.request;
+          td.appendChild(pre);
+          tr.appendChild(td);
+        }
+        {
+          const td  = document.createElement('td');
+          const pre = document.createElement('div');
+          pre.classList.add('http-body')
+          pre.innerText = entry.response;
+          td.appendChild(pre);
+          tr.appendChild(td);
+        }
+        {
+          const td     = document.createElement('td');
+          td.innerText = entry.status;
+          tr.appendChild(td);
+        }
+        {
+          const td     = document.createElement('td');
+          td.innerText = entry.ip;
+          tr.appendChild(td);
+        }
+        {
+          const td     = document.createElement('td');
+          td.innerText = entry.queryTime;
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+    }
+    </script>
 {% endblock %}
